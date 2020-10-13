@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+        link(rel="shortcut icon" type="image/png" href="img/favicon.png")
+        title Sauce Kitchen | #{title}
+    body
+        div(class="container")
+            form(action="/signin" method="POST")
+                input(type="text" name="email" placeholder="E-mail" class="form-control")
+                input(type="password" name="password" placeholder="Password")
+                button Login
+
+    //- script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    //- script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js")
+    //- script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
