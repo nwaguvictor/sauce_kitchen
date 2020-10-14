@@ -37,7 +37,7 @@ const schema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'chef', 'user'],
+        enum: ['admin', 'chef', 'customer'],
         default: 'user',
         select: false
     }
