@@ -40,13 +40,6 @@ schema.pre('save', function (next) {
     next();
 });
 
-// Query Middlewares
-schema.pre(/^find/, function (next) {
-    this.select('-__v');
-    
-    next();
-})
-
 // Static methods
 schema.statics.findBySlug = function (slug) {
     return this.findOne({ slug });

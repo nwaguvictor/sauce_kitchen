@@ -19,6 +19,12 @@ const schema = new Schema({
         validate: [validator.isEmail, 'please provide valid email address'],
         trim: true
     },
+    phone: String,
+    address: {
+        type: String,
+        minlength: [5, 'address should be at least 5 characters'],
+        default: 'Genesys Techhub'
+    },
     password: {
         type: String,
         minlength: [5, 'password must be atleast 5 characters'],
@@ -52,12 +58,6 @@ schema.pre('save', async function (next) {
     this.passwordConfirm = undefined;
     next();
 });
-
-// Query Middlewares
-schema.pre(/^find/, function (next) {
-    this.select('-__v');
-    next()
-})
 
 // Instance methods
 schema.methods.signToken = function() {

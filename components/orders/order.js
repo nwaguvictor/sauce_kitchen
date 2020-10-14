@@ -20,7 +20,18 @@ const schema = new Schema({
 
 // Query middlewares
 schema.pre(/^find/, function (next) {
-    this.populate('user', 'name')
+    this.populate({
+        path: 'customer',
+        select: 'name address phone -_id',
+        model: 'User'
+    });
+    this.populate({
+        path: 'item',
+        select: 'name price -_id',
+        model: 'Food'
+    });
+    this.select('customer item address');
+    
     next();
 })
 

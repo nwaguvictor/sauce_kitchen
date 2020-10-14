@@ -37,6 +37,7 @@ app.post('/signin', routes.userRoutes);
 
 app.use('/api/v1/users', routes.userRoutes);
 app.use('/api/v1/foods', routes.foodRoutes);
+app.use('/api/v1/orders', routes.orderRoutes);
 
 // Catch all undefined routes
 app.all('*', (req, res, next) => {

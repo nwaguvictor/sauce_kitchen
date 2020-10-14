@@ -1,16 +1,15 @@
 const router = require('express').Router();
 const controller = require('./ordersController');
-const { auth, food } = require('./../middlewares');
+const { auth, order } = require('./../middlewares');
 
-router.param('food', food.foundAndSetFood);
+router.param('order', order.foundOrder);
 
 router.route('/')
-    .get()
-    .post()
+    .get(auth.protected, auth.restricted('admin', 'chef'), controller.view)
+    .post(auth.protected, auth.restricted('customer'), controller.create)
 
-router.route('/:food')
-    .get()
-    .patch()
-    .delete()
+router.route('/:order')
+    .get(auth.protected, auth.restricted('admin', 'chef'), controller.show)
+    .delete(auth.protected, auth.restricted('admin', 'chef'), controller.delete)
 
 module.exports = router;
