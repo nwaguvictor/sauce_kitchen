@@ -53,6 +53,7 @@ schema.pre('save', async function (next) {
     next();
 });
 
+// Query Middlewares
 schema.pre(/^find/, function (next) {
     this.select('-__v');
     next()

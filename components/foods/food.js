@@ -40,9 +40,9 @@ schema.pre('save', function (next) {
     next();
 });
 
+// Query Middlewares
 schema.pre(/^find/, function (next) {
-    this.select('-__v')
-    this.find({ isAvailable: { $ne: false } });
+    this.select('-__v');
     
     next();
 })

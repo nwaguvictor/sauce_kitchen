@@ -19,9 +19,11 @@ exports.protected = asyncWrapper(async (req, res, next) => {
     next();
 });
 
-exports.restricted = (req, res, next) => {
-    if (req.user.role !== 'admin') {
-        return next(new AppError('you are forbiden from executing this action', 403));
-    }
-    next();
-};
+exports.restricted = (...allowed) => {
+    return (req, res, next) => {
+        if (!allowed.includes(req.user.role)) {
+            return next(new AppError('you are forbiden from executing this action', 403));
+        }
+        next();
+    };
+}

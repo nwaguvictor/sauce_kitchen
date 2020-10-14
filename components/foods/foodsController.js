@@ -4,7 +4,7 @@ const AppError = require('../../utils/appError');
 const { asyncWrapper } = require('../../utils/helpers');
 
 exports.view = asyncWrapper(async (req, res, next) => {
-    const foods = await Food.find();
+    const foods = await Food.find({ isAvailable: { $ne: false } });
     res.status(200).json({
         status: 'success',
         resuslts: foods.length,
@@ -27,18 +27,18 @@ exports.create = asyncWrapper(async (req, res, next) => {
 exports.show = asyncWrapper(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
-        data: { food: req.food }
+        data: { food: req.food } 
     })
 });
 
 exports.edit = asyncWrapper(async (req, res, next) => {
-    const filtered = _.pick(req.body, 'name', 'description', 'price', 'misc', 'photo');
+    const filtered = _.pick(req.body, 'name', 'description', 'price', 'misc', 'photo', 'isAvailable');
     const updatedFood = await Food.findOneAndUpdate({ slug: req.food.slug }, filtered, {
         new: true,
         runValidation: true
     });
 
-    res.status(201).json({
+    res.status(200).json({
         status: 'success',
         data: { food: updatedFood }
     });

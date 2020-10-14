@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:slug')
     .get(controller.show)
-    .patch(auth.protected, auth.restricted, controller.edit)
-    .delete(auth.protected, auth.restricted, controller.delete);
+    .patch(auth.protected, auth.restricted('admin', 'chef'), controller.edit)
+    .delete(auth.protected, auth.restricted('admin', 'chef'), controller.delete);
 
 module.exports = router;
