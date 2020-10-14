@@ -1,0 +1,21 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-secondary);
+    padding: 0 1rem;
+}
+
+.hero {
+    width: 100%;
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem;
+    background: linear-gradient(rgba(0,0,0, .5), rgba(0,0,0,.8)), url('../img/background-1.jpg') no-repeat;
+    background-position: top;
+    background-size: 100%;
+}

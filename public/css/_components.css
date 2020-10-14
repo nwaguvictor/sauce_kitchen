@@ -1,0 +1,50 @@
+.logo {
+    flex: 0 0 20%;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a {
+    text-decoration: none;
+    padding: 1.4rem 1.8rem;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ddd;
+}
+
+.hero-text {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero-text--main {
+    color: var(--color-primary);
+    font-weight: 300;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero-text--sub {
+    color: var(--color-secondary);
+    letter-spacing: 4px;
+}
+
+.btn {
+    margin: 1rem 0;
+    padding: .8rem 3rem;
+    border-radius: 100px;
+    border: 1px solid #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.btn.btn__primary {
+    color: var(--color-secondary);
+    border: 1px solid var(--color-secondary)
+}

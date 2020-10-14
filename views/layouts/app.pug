@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="shortcut icon" type="image/png" href="img/favicon.png")
+        link(rel="stylesheet" href="css/style.css")
+        link(href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet")
+        title Sauce Kitchens | #{title}
+    body
+        div(class="app")
+            header(class="header")
+                div(class="logo")
+                    h2 Sauce Kitchens
+                nav(class="navbar") 
+                    a(href="/") Home
+                    a(href="/foods") Today's Sauce
+                    a(href="/login") Login
+                    a(href="/register") Register
+        div(class="content")
+            block content
+
+        footer(class="foot")
+                
+    script(src="js/app.js")

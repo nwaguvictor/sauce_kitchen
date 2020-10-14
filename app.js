@@ -28,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Routes
 app.get('/', (req, res) => {
-    res.status(200).render('base', {
+    res.status(200).render('welcome', {
         title: 'Home'
     });
 });
