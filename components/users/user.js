@@ -44,20 +44,30 @@ const schema = new Schema({
     role: {
         type: String,
         enum: ['admin', 'chef', 'customer'],
-        default: 'user',
+        default: 'customer',
+        select: false
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
         select: false
     }
 });
 
 // Document middlewares
 schema.pre('save', async function (next) {
-    if (!this.isNew) return next();
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('password') || !this.isNew) return next();
 
     this.password = await bcrypt.hash(this.password, 10);
     this.passwordConfirm = undefined;
     next();
 });
+
+schema.pre('update', async function (next) {
+    this.password = await bcrypt.hash(this.password, 10);
+    this.passwordConfirm = undefined;
+    next();
+})
 
 // Instance methods
 schema.methods.signToken = function() {

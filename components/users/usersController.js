@@ -1,5 +1,4 @@
-const { promisify } = require('util');
-const jwt = require('jsonwebtoken');
+const _ = require('underscore');
 const User = require('./user');
 const AppError = require('../../utils/appError');
 const { asyncWrapper, sendAuthResponse } = require('../../utils/helpers');
@@ -36,6 +35,42 @@ const controller = {
             data: { user: req.user }
         });
     }),
+    updateMe: asyncWrapper(async (req, res, next) => {
+        const filtered = _.pick(req.body, 'name', 'email', 'address', 'phone');
+        const user = await User.findByIdAndUpdate(req.user._id, filtered, { new: true, runValidators: true })
+        res.status(200).json({
+            status: 'success',
+            data: { user }
+        })
+    }),
+    deleteMe: asyncWrapper(async (req, res, next) => {
+        await User.findOneAndUpdate({email: req.user.email}, { isActive: false });
+        res.status(201).json({
+            status: 'success',
+            data: null
+        });
+    }),
+    passwordForgot: asyncWrapper(async (req, res, next) => {
+
+    }),
+    passwordReset: asyncWrapper(async (req, res, next) => {
+
+    }),
+    passwordUpdate: asyncWrapper(async (req, res, next) => {
+        const { current, password, passwordConfirm } = req.body;
+        let user = await User.findById(req.user._id).select('+password');
+        if (!current || !password || !passwordConfirm) {
+            return next(new AppError('please provide all password fields', 400));
+        }
+        if (! (await user.verifyPassword(current, user.password))) {
+            return next(new AppError('current password is wrong', 401));
+        }
+        user.password = password;
+        user.passwordConfirm = passwordConfirm;
+        await user.save();
+
+        sendAuthResponse(res, user, 'password updated successfully');
+    }),
     view: asyncWrapper(async (req, res, next) => {
         const users = await User.find({});
         res.status(200).json({
@@ -43,6 +78,16 @@ const controller = {
             data: {
                 users
             }
+        });
+    }),
+    show: asyncWrapper(async (req, res, next) => {
+
+    }),
+    delete: asyncWrapper(async (req, res, next) => {
+        await User.findByIdAndDelete(req.params.id);
+        res.status(201).json({
+            status: 'success',
+            data: null
         });
     })
 }

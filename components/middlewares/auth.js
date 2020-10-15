@@ -16,7 +16,6 @@ const auth = {
         if (!authUser) return next(new AppError('user with token not found', 401));
     
         // Grant access and Add user to req object
-        authUser.role = undefined;
         req.user = authUser;
         next();
     }),
