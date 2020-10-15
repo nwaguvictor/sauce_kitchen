@@ -27,17 +27,15 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // Routes
-app.get('/', (req, res) => {
-    res.status(200).render('welcome', {
-        title: 'Home'
-    });
-});
 
-app.post('/signin', routes.userRoutes);
+// app.post('/signin', routes.userRoutes);
 
 app.use('/api/v1/users', routes.userRoutes);
 app.use('/api/v1/foods', routes.foodRoutes);
 app.use('/api/v1/orders', routes.orderRoutes);
+
+// Rendering for websites
+app.use('/', routes.renderRoutes);
 
 // Catch all undefined routes
 app.all('*', (req, res, next) => {
