@@ -6,6 +6,7 @@ router.get('/', controller.homePage);
 router.route('/login')
     .get(controller.loginPage)
     .post(controller.login)
+    
 router.route('/register')
     .get(controller.registerPage)
     .post(controller.register)
