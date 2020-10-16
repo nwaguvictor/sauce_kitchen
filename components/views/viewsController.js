@@ -1,5 +1,5 @@
-const Foods = require('./../foods');
-const { asyncWrapper } = require('./../../utils/helpers');
+const Foods = require('../foods');
+const { asyncWrapper } = require('../../utils/helpers');
 const controller = {
     home: asyncWrapper(async (req, res, next) => {
         res.status(200).render('welcome', {
