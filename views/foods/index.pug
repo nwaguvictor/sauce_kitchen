@@ -1,5 +1,20 @@
 extends ../layouts/app
 
 block content 
-    each food in foods
-        p= food.toString()
+    .container
+        .food-cards
+            each food in foods
+                .food-card
+                    .food-card__header
+                        h2.title=food.name
+                    .food-card__body
+                        img.food-img(src="")
+                    .food-card__footer
+                        .info
+                            p.description=food.description
+                            p.price= `NGN ${food.price}`
+                        .cta
+                            a.cta__btn(href=`/foods/${food.slug}`) Order Now
+
+
+        

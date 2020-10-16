@@ -63,7 +63,7 @@ schema.pre('save', async function (next) {
     next();
 });
 
-schema.pre('update', async function (next) {
+schema.pre('update', { document: true, query: false }, async function (next) {
     this.password = await bcrypt.hash(this.password, 10);
     this.passwordConfirm = undefined;
     next();
