@@ -1,11 +1,20 @@
 const router = require('express').Router();
 const controller = require('./viewsController');
 
-router.get('/', controller.home);
-router.get('/login', controller.login);
-router.get('/register', controller.register);
-router.get('/password-reset', controller.passwordReset);
-router.get('/foods', controller.foods);
-router.get('/foods/:slug', controller.food);
+router.get('/', controller.homePage);
+
+router.route('/login')
+    .get(controller.loginPage)
+    .post(controller.login)
+router.route('/register')
+    .get(controller.registerPage)
+    .post(controller.register)
+
+router.route('/password-reset')
+    .get(controller.passwordResetPage)
+    .post(controller.passwordReset)
+
+router.get('/foods', controller.foodsPage);
+router.get('/foods/:slug', controller.foodPage);
 
 module.exports = router;
