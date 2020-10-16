@@ -31,7 +31,7 @@ const controller = {
     }),
     edit: asyncWrapper(async (req, res, next) => {
         const filtered = _.pick(req.body, 'name', 'description', 'price', 'misc', 'photo', 'isAvailable');
-        const updatedFood = await Food.findOneAndUpdate({ slug: req.food.slug }, filtered, {
+        const updatedFood = await Food.findByIdAndUpdate(req.food_id, filtered, {
             new: true,
             runValidation: true
         });
@@ -42,7 +42,7 @@ const controller = {
         });
     }),
     delete: asyncWrapper(async (req, res, next) => {
-        await Food.findOneAndUpdate({ slug: req.food.slug}, { isAvailable: false });
+        await Food.findByIdAndUpdate(req.food._id, { isAvailable: false });
         res.status(204).json({
             status: 'success',
         });
