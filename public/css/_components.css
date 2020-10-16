@@ -48,3 +48,8 @@
     color: var(--color-secondary);
     border: 1px solid var(--color-secondary)
 }
+
+.food-card {
+    margin: .4rem;
+    width: 30%
+}

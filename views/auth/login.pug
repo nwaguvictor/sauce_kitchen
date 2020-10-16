@@ -1,0 +1,13 @@
+extends ../layouts/app
+
+block content
+    .container
+        form.login-form(action="/login", method="POST")
+            .form-group
+                label(for="email") User Email
+                input.form-control(type="email" name="email" id="email" placeholder="Enter User email..." required)
+            .form-group
+                label(for="password") User Password
+                input.form-control(type="password" name="password" id="password" placeholder="*********" required)
+            button.btn.btn__login(type="submit") Login Now
+            

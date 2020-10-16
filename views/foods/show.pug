@@ -1,15 +1,22 @@
 extends ../layouts/app
 
 block content 
-    .contain
-        .food-card
-            .food-card__header
-                h2.title=food.name
-            .food-card__body
-                img.food-img(src="")
-            .food-card__footer
-                .info
-                    p.description=food.description
-                    p.price= `NGN ${food.price}`
-                .cta
-                    a.cta__btn(href=`/foods/${food.slug}`) Order Now
+    .container
+        h2.title Make An Order Now
+        .order-section
+            .order-info
+                form.order-form(method="POST" action="/orders/create")
+                    .form-group
+                        label(for="name") Food Name
+                        input.form-control(type="text", name="name", id="name" readonly="readonly" value=`${food.name}`)
+                    .form-group
+                        label(for="address") Delivery Address 
+                        input.form-control(type="text", name="address", id="address", placeholder="Enter delivery address")
+                    button.btn.btn__order(type="submit") Order Now
+            .order-item
+                .item
+                    h3.item__title= food.name
+                    p.item__price= `NGN ${food.price}`
+                    img.item__image(src="/img/foods/food-1.jpg" style={ width: '100%' })
+                    p.item__description=food.description
+                

@@ -6,6 +6,21 @@ const controller = {
             title: 'Home'
         });
     }),
+    login: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('auth/login', {
+            title: 'login page'
+        })
+    }),
+    register: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('auth/register', {
+            title: 'register page'
+        })
+    }),
+    passwordReset: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('auth/password-reset', {
+            title: 'reset password page'
+        })
+    }),
     foods: asyncWrapper(async (req, res, next) => {
         const foods = await Foods.find();
         res.status(200).render('foods/index', {

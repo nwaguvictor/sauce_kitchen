@@ -15,7 +15,7 @@ const schema = new Schema({
         type: Date,
         default: Date.now
     },
-    location: String
+    address: String
 });
 
 // Query middlewares

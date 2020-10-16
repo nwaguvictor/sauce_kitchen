@@ -11,11 +11,11 @@ const controller = {
         })
     }),
     create: asyncWrapper(async (req, res, next) => {
-        const { location, food } = req.body;
+        const { address, food } = req.body;
         let order = new Order({
             customer: req.user._id,
             item: food,
-            location
+            address
         });
         order = await order.save();
 
