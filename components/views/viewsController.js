@@ -3,6 +3,18 @@ const User = require('../users');
 const { asyncWrapper } = require('../../utils/helpers');
 const AppError = require('../../utils/appError');
 
+const signCookieToken = (res, user) => {
+    const token = user.signToken();
+    const cookieOptions = {
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30days
+        httpOnly: true
+    }
+
+    if (process.env.NODE_ENV === 'production') {
+        cookieOptions.secure = true;
+    }
+    res.cookie('jwt', token, cookieOptions); 
+}
 
 const controller = {
     // Home Page
@@ -31,16 +43,7 @@ const controller = {
             return next(new AppError('email or password wrong!', 401))
         }
         
-        const token = user.signToken();
-        const cookieOptions = {
-            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30days
-            httpOnly: true
-        }
-
-        if (process.env.NODE_ENV === 'production') {
-            cookieOptions.secure = true;
-        }
-        res.cookie('jwt', token, cookieOptions);
+        signCookieToken(res, user);
         res.redirect('/')
     }),
 
@@ -53,6 +56,13 @@ const controller = {
         })
     }),
     register: asyncWrapper(async (req, res, next) => {
+        const { name, email, phone, address, password, passwordConfirm } = req.body;
+        let user = await User.findOne({ email });
+        if (user) return next(new AppError('User with that email already exist!', 400));
+
+        user = await User.create({ name, email, phone, address, password, passwordConfirm });
+
+        signCookieToken(res, user);
         res.redirect('/')
     }),
 
