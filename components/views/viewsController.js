@@ -127,12 +127,37 @@ const controller = {
         });
     }),
     kitchen: asyncWrapper(async (req, res, next) => {
-        const foods = await User.find();
+        const foods = await Food.find();
         res.status(200).render('admin/kitchen', {
             title: 'Kitchen',
             foods
         });
     }),
+    addFood: asyncWrapper(async (req, res, next) => {
+        const { name, description, price, misc, photo } = req.body;
+        if (!name || !price || !description) {
+            return next(new AppError('please provide food name, price and description', 400));
+        }
+        const food = await Food.findOne({ name });
+        if (food) return next(new AppError('food with that name already added...', 400));
+        await Food.create({ name, description, price, misc, photo });
+
+        res.redirect('/admin/kitchen');
+    }),
+    editFood: asyncWrapper(async (req, res, next) => {
+        const filtered = _.pick(req.body, 'name', 'description', 'price', 'misc', 'photo', 'isAvailable');
+        const updatedFood = await Food.findByIdAndUpdate(req.food_id, filtered, {
+            new: true,
+            runValidation: true
+        });
+    
+        res.redirect('/admin/kitchen');
+    }),
+    deleteFood: asyncWrapper(async (req, res, next) => {
+        await Food.findByIdAndUpdate(req.food._id, { isAvailable: false });
+
+        res.redirect('/admin/kitchen');
+    })
 }
 
 module.exports = controller;

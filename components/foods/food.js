@@ -20,7 +20,7 @@ const schema = new Schema({
     },
     price: {
         type: Number,
-        enum: [200, 300, 500],
+        enum: [200, 300, 400, 500],
         default: 200
     },
     misc: {

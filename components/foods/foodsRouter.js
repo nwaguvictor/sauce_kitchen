@@ -6,7 +6,7 @@ router.param('id', food.foundAndSetFood);
 
 router.route('/')
     .get(controller.view)
-    .post(auth.protected, auth.restricted, controller.create);
+    .post(auth.protected, auth.restricted('admin', 'chef'), controller.create);
 
 router.route('/:id')
     .get(controller.show)
