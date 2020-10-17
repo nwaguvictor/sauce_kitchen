@@ -12,7 +12,7 @@ const auth = {
         } else if (req.cookies.jwt) {
             token = req.cookies.jwt;
         }
-        if (!token) return next(new AppError('access denied. Please provide token', 401));
+        if (!token) return next(new AppError('sorry, please log in to proceed', 401));
     
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_KEY);
         const authUser = await (await User.findById(decoded.id).select('+role'));
@@ -26,7 +26,7 @@ const auth = {
     restricted: (...allowed) => {
         return (req, res, next) => {
             if (!allowed.includes(req.user.role)) {
-                return next(new AppError('you are forbiden from executing this action', 403));
+                return next(new AppError('Access Denied. Sorry, you are not allowed', 403));
             }
             next();
         };
