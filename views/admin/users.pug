@@ -2,4 +2,24 @@ extends ../layouts/app
 
 block content
     .container
-        h1 Users
+        header.admin-header-title Users Section
+        hr
+        section.user-section
+            .food__display
+                h3.food__list List of all Users
+                table.food__table
+                    tr
+                        th Name
+                        th Email
+                        th Phone
+                        th Address
+                        th Actions
+                    
+                    each user in users
+                        tr 
+                            td= user.name
+                            td= user.email
+                            td= user.phone
+                            td= user.address
+                            td
+                                a(href=`#`) Delete

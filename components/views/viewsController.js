@@ -113,28 +113,32 @@ const controller = {
         });
     }),
     ordersPage: asyncWrapper(async (req, res, next) => {
-        const orders = await Order.find();
+        const orders = await Order.find().sort('orderDate');
         res.status(200).render('admin/orders', {
             title: 'Orders',
             orders
         });
     }),
     usersPage: asyncWrapper(async (req, res, next) => {
-        const users = await User.find();
+        const users = await User.find().sort('name');
         res.status(200).render('admin/users', {
             title: 'Users',
             users
         });
     }),
     kitchen: asyncWrapper(async (req, res, next) => {
-        const foods = await Food.find();
+        const foods = await Food.find().sort('name');
         res.status(200).render('admin/kitchen', {
             title: 'Kitchen',
             foods
         });
     }),
     addFood: asyncWrapper(async (req, res, next) => {
-        const { name, description, price, misc, photo } = req.body;
+        let { name, description, price, misc, photo } = req.body;
+        misc = misc.split(',') || misc.split(', ');
+        if (req.file) {
+            photo = req.file.filename;
+        }
         if (!name || !price || !description) {
             return next(new AppError('please provide food name, price and description', 400));
         }
@@ -146,6 +150,9 @@ const controller = {
     }),
     editFood: asyncWrapper(async (req, res, next) => {
         const filtered = _.pick(req.body, 'name', 'description', 'price', 'misc', 'photo', 'isAvailable');
+        if (req.file) {
+            filtered.photo = req.file.filename;
+        }
         const updatedFood = await Food.findByIdAndUpdate(req.food_id, filtered, {
             new: true,
             runValidation: true

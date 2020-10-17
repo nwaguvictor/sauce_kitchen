@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const { auth, view } = require('../middlewares');
+const { auth, view, food } = require('../middlewares');
 const controller = require('./viewsController');
+const multer = require('multer');
+const upload = multer({ dest: 'public/img/foods' });
 
 router.use(view.isLoggedIn);
 router.get('/', controller.homePage);
@@ -26,22 +28,22 @@ router.get('/foods/:slug', controller.foodPage);
 router.post('/orders/create', auth.protected, auth.restricted('customer'), controller.createOrder);
 
 // For Admins And Chefs
-router.use('/admin', auth.protected, auth.restricted('admin', 'chef'));
+router.use('/admin', auth.protected);
 router.get('/admin', controller.adminPage);
 
 // Admin Orders Route
 router.route('/admin/orders')
-    .get(controller.ordersPage);
+    .get(controller.ordersPage, auth.restricted('admin', 'chef'));
 
 // Admin Users Route
 router.route('/admin/users')
-    .get(controller.usersPage);
+    .get(controller.usersPage, auth.restricted('admin'));
 
 // Admin Kitchen Route
 router.route('/admin/kitchen')
     .get(controller.kitchen)
-    .post(controller.addFood)
-    .patch(controller.editFood)
+    .post(food.imageUpload, controller.addFood)
+    .patch(food.imageUpload, controller.editFood)
     .delete(controller.deleteFood);
 
 module.exports = router;

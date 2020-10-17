@@ -6,7 +6,7 @@ block content
         hr
         section.food-section
             .forms
-                form.forms__add(method="POST", action="/admin/kitchen")
+                form.forms__add(method="POST", action="/admin/kitchen" enctype="multipart/form-data")
                     .form-group
                         label.form__label(for="name") Name
                         input.form-control(type="text", name="name", id="name" placeholder="Enter food name")
@@ -21,7 +21,7 @@ block content
                         input.form-control(type='text' name="misc",  placeholder="e.g: 'meat', 'plaintain'")
                     .form-group
                         label.form__label(for="photo") Photo
-                        input.form-control(type='file' name="photo" accept="image/*")
+                        input.form-control(type='file' name="photo" id="photo" accept="image/*")
 
                     button.btn.btn__add(type="submit") Add Food
             .food__display
@@ -29,18 +29,16 @@ block content
                 table.food__table
                     tr
                         th Name
-                        th Description
                         th Price
-                        th Misc
+                        th Status
                         th Photo
                         th Actions
                     
                     each food in foods
                         tr 
                             td= food.name
-                            td= food.description
                             td= `NGN${food.price}`
-                            td= food.misc
+                            td= `${food.isAvailable ? 'available' : 'not available'}`
                             td= food.photo
                             td
                                 a(href=`#`) Delete

@@ -2,4 +2,24 @@ extends ../layouts/app
 
 block content
     .container
-        h1 orders
+        header.admin-header-title Orders Section
+        hr
+        section.user-section
+            .food__display
+                h3.food__list List of all Orders
+                table.food__table
+                    tr
+                        th Ordered By
+                        th Item
+                        th Phone
+                        th Address
+                        th Actions
+                    
+                    each order in orders
+                        tr 
+                            td= order.customer.name
+                            td= order.item.name
+                            td= order.customer.phone
+                            td= order.address
+                            td
+                                a(href=`#`) Delete
