@@ -7,7 +7,11 @@ const AppError = require('../../utils/appError');
 const auth = {
     protected: asyncWrapper(async (req, res, next) => {
         let token;
-        if (req.headers.authorization) token = req.headers.authorization;
+        if (req.headers.authorization) {
+            token = req.headers.authorization;
+        } else if (req.cookies.jwt) {
+            token = req.cookies.jwt;
+        }
         if (!token) return next(new AppError('access denied. Please provide token', 401));
     
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_KEY);

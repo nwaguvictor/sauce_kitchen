@@ -1,0 +1,11 @@
+extends ../layouts/app
+
+block content
+    .container 
+        .error-wrapper
+            .error
+                //- img.error-image(src="/img/error.webp")
+                h1.error__code= info.statusCode
+                h4.error__message= info.message
+                a(href="/") Home Page
+            

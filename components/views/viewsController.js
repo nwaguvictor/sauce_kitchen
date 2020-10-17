@@ -94,7 +94,28 @@ const controller = {
         res.status(200).render('foods/show', {
             food
         })
-    })
+    }),
+
+    adminPage: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('admin/index', {
+            title: 'Admin Dashboard'
+        });
+    }),
+    ordersPage: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('admin/orders', {
+            title: 'Orders'
+        });
+    }),
+    usersPage: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('admin/users', {
+            title: 'Users'
+        });
+    }),
+    kitchen: asyncWrapper(async (req, res, next) => {
+        res.status(200).render('admin/kitchen', {
+            title: 'Kitchen'
+        });
+    }),
 }
 
 module.exports = controller;

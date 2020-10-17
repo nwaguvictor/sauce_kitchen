@@ -6,7 +6,7 @@ const validator = require('validator');
 const schema = new Schema({
     name: {
         type: String,
-        require: [true, 'name is required'],
+        required: [true, 'name is required'],
         lowercase: true,
         minlength: [5, 'name must be atleast 5 characters'],
         maxlength: [256, 'name must be below 256 characters'],

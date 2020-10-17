@@ -4,21 +4,17 @@ const jwt = require('jsonwebtoken');
 const User = require('./../users');
 const { asyncWrapper } = require("../../utils/helpers");
 
-const viewMiddleware = {
-    isLoggedIn: asyncWrapper(async (req, res, next) => {
-        if (req.cookies.jwt) {
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_KEY);
-            const auth = await User.findById(decoded.id);
+exports.isLoggedIn = asyncWrapper(async (req, res, next) => {
+    if (req.cookies.jwt) {
+        const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_KEY);
+        const auth = await User.findById(decoded.id);
 
-            if (!auth) return next();
+        if (!auth) return next();
 
-            res.locals.auth = auth;
-            req.user = auth;
-            return next();
-        }
-        
-        next();
-    }),
-}
-
-module.exports = viewMiddleware;
+        res.locals.auth = auth;
+        req.user = auth;
+        return next();
+    }
+    
+    next();
+})
