@@ -7,6 +7,7 @@ const controller = {
         const orders = await Order.find();
         res.status(200).json({
             status: 'success',
+            results: orders.length,
             data: { orders }
         })
     }),

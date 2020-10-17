@@ -8,7 +8,9 @@ block content
                 form.order-form(method="POST" action="/orders/create")
                     .form-group
                         label(for="name") Food Name
-                        input.form-control(type="text", name="name", id="name" readonly="readonly" value=`${food.name}`)
+                        input.form-control(type="text", name="foodName", id="foodName" readonly="readonly" value=`${food.name}`)
+                    .form-group
+                        input.form-control(type="hidden", name="food", value=`${food._id}`)
                     .form-group
                         label(for="address") Delivery Address 
                         input.form-control(type="text", name="address", id="address", placeholder="Enter delivery address")

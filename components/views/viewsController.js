@@ -1,5 +1,6 @@
 const Food = require('../foods');
 const User = require('../users');
+const Order = require('../orders');
 const { asyncWrapper } = require('../../utils/helpers');
 const AppError = require('../../utils/appError');
 
@@ -95,25 +96,41 @@ const controller = {
             food
         })
     }),
+    createOrder: asyncWrapper(async (req, res, next) => {
+        let { foodName, food, address } = req.body;
+        if (!food) return next(new AppError('sorry, what do you want?', 400))
+        if (!address) address = req.user.address;
+        const order = await Order.create({ customer: req.user._id, item: food, address });
+        res.status(201).json({
+            status: 'success',
+            data: { order }
+        });
+    }),
 
     adminPage: asyncWrapper(async (req, res, next) => {
         res.status(200).render('admin/index', {
-            title: 'Admin Dashboard'
+            title: 'Admin Dashboard',
         });
     }),
     ordersPage: asyncWrapper(async (req, res, next) => {
+        const orders = await Order.find();
         res.status(200).render('admin/orders', {
-            title: 'Orders'
+            title: 'Orders',
+            orders
         });
     }),
     usersPage: asyncWrapper(async (req, res, next) => {
+        const users = await User.find();
         res.status(200).render('admin/users', {
-            title: 'Users'
+            title: 'Users',
+            users
         });
     }),
     kitchen: asyncWrapper(async (req, res, next) => {
+        const foods = await User.find();
         res.status(200).render('admin/kitchen', {
-            title: 'Kitchen'
+            title: 'Kitchen',
+            foods
         });
     }),
 }

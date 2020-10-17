@@ -21,6 +21,7 @@ router.get('/logout', controller.logout);
 
 router.get('/foods', controller.foodsPage);
 router.get('/foods/:slug', controller.foodPage);
+router.post('/orders/create', auth.protected, controller.createOrder);
 
 // For Admins And Chefs
 router.use('/admin', auth.protected, auth.restricted('admin', 'chef'));
