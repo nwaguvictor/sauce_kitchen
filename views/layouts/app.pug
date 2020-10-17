@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
+        link(rel="shortcut icon" type="image/png" href="/img/logo-2.jpeg")
         link(rel="stylesheet" href="/css/style.css")
         link(href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet")
         title Sauce Kitchens | #{title}
@@ -15,8 +15,14 @@ html(lang="en")
                 nav.navbar
                     a(href="/") Home
                     a(href="/foods") Today's Sauce
-                    a(href="/login") Login
-                    a(href="/register") Register
+
+                    if auth
+                        a(href="#")= auth.name.split(' ')[0]
+                        a(href="/logout") Log Out
+
+                    else
+                        a(href="/login") Login
+                        a(href="/register") Register
         div.content
             block content
 

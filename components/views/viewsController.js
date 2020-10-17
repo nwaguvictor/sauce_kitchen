@@ -14,6 +14,8 @@ const controller = {
 
     // Login
     loginPage: asyncWrapper(async (req, res, next) => {
+        if (req.user) res.redirect('/');
+
         res.status(200).render('auth/login', {
             title: 'login page'
         })
@@ -44,6 +46,8 @@ const controller = {
 
     // Register
     registerPage: asyncWrapper(async (req, res, next) => {
+        if (req.user) res.redirect('/');
+        
         res.status(200).render('auth/register', {
             title: 'register page'
         })
@@ -62,6 +66,10 @@ const controller = {
         res.status(200).render('auth/password-reset', {
             title: 'reset password page'
         })
+    }),
+    logout: asyncWrapper(async (req, res, next) => {
+        res.cookie('jwt', '', { expires: new Date(Date.now() + 5000) });
+        res.redirect('/');
     }),
 
     // Foods Pages
