@@ -51,5 +51,22 @@
 
 .food-card {
     margin: .4rem;
-    width: 30%
+    width: 30%;
+    margin-bottom: 2rem;
+}
+
+.food-card__footer {
+    background-color: var(--color-primary);
+    padding: 1rem;
+}
+
+.food-card__footer .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn.btn__cta {
+    padding: .4rem 1.6rem;
+    font-size: 1.4rem;
 }

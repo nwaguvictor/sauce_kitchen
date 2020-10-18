@@ -2,22 +2,18 @@ extends ../layouts/app
 
 block content 
     .container
+        h2.heading-primary Welcome to Madam Sauce's
         .food-cards
             each food in foods
                 .food-card
-                    .food-card__header
-                        .header-info
-                            h2.title=food.name.toUpperCase()
-                            - const availability = food.isAvailable ? 'available' : 'not-available';
-                            span(class=`${availability}`) #{availability}
                     .food-card__body
                         img.food-img(src="/img/foods/food-2.jpg" style={ width: '100%' })
                     .food-card__footer
                         .cta
-                            a.cta__btn(href=`/foods/${food.slug}`) Order Now
+                            h3.title=food.name.toUpperCase()
                         .info
                             p.price= `NGN ${food.price}`
-                            p.description=food.description
+                            a.btn.btn__cta(href=`/foods/${food.slug}`) Place Order
 
 
         
