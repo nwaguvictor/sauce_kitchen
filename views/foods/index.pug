@@ -7,7 +7,7 @@ block content
             each food in foods
                 .food-card
                     .food-card__body
-                        img.food-img(src="/img/foods/food-2.jpg" style={ width: '100%' })
+                        img.food-img(src=`/img/foods/${food.photo}` style={ width: '100%' })
                     .food-card__footer
                         .cta
                             h3.title=food.name.toUpperCase()

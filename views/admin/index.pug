@@ -2,4 +2,16 @@ extends ../layouts/app
 
 block content
     .container
-        h1 Admin Page
+        section.admin-section 
+            header.admin-header
+                h2 Admin Section | #{title}
+                nav.admin-nav
+                    a.nav-link(href="/admin/kitchen") View Kitchen
+                    a.nav-link(href="/admin/orders") View Orders
+                    a.nav-link(href="/admin/users") View All Users
+
+        block admin-nav
+
+    
+block footer 
+    

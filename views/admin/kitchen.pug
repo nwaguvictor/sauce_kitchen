@@ -1,46 +1,48 @@
-extends ../layouts/app
+extends index
 
-block content
+block admin-nav
     .container
-        header.admin-header-title Kitchen Section
-        hr
-        section.food-section
-            .forms
-                form.forms__add(method="POST", action="/admin/kitchen" enctype="multipart/form-data")
+        section.kitchen-section
+            .food__add
+                form.form.forms__add(method="POST", action="/admin/kitchen" enctype="multipart/form-data")
                     .form-group
-                        label.form__label(for="name") Name
+                        label.form-label(for="name") Name
                         input.form-control(type="text", name="name", id="name" placeholder="Enter food name")
                     .form-group
-                        label.form__label(for="price") Price
+                        label.form-label(for="price") Price
                         input.form-control(type="text", name="price", id="price" placeholder="Enter food price")
                     .form-group
-                        label.form__label(for="price") Description
+                        label.form-label(for="price") Description
                         textarea.form-control(name="description", cols="30", rows="10", placeholder="Enter food decription")
                     .form-group
-                        label.form__label(for="price") Miscs.
+                        label.form-label(for="price") Miscs.
                         input.form-control(type='text' name="misc",  placeholder="e.g: 'meat', 'plaintain'")
                     .form-group
-                        label.form__label(for="photo") Photo
+                        label.form-label(for="photo") Photo
                         input.form-control(type='file' name="photo" id="photo" accept="image/*")
 
                     button.btn.btn__add(type="submit") Add Food
             .food__display
-                h3.food__list List of all foods
-                table.food__table
-                    tr
-                        th Name
-                        th Price
-                        th Status
-                        th Photo
-                        th Actions
-                    
-                    each food in foods
-                        tr 
-                            td= food.name
-                            td= `NGN${food.price}`
-                            td= `${food.isAvailable ? 'available' : 'not available'}`
-                            td= food.photo
-                            td
-                                a(href=`#`) Delete
+                .table-wrapper 
+                    table.table.food__table
+                        tr
+                            th S/N
+                            th Name
+                            th Price
+                            th Status
+                            th Photo
+                            th Actions
+                        - let cnt = 0;
+                        each food in foods
+                            - cnt++;
+                            tr 
+                                td= cnt
+                                td= food.name
+                                td= `NGN${food.price}`
+                                td= `${food.isAvailable ? 'available' : 'not available'}`
+                                td
+                                    img(src=`/img/foods/${food.photo}`, alt=`${food.slug}` width='60' height='30')
+                                td
+                                    a(href=`#`) Delete
                     
                     

@@ -2,23 +2,24 @@ extends ../layouts/app
 
 block content
     .container
-        form.register-form(action="/register", method="POST")
-            .form-group
-                label(for="name") Full Name
-                input.form-control(type="name" name="name" id="name" placeholder="Enter Full Name...")
-            .form-group
-                label(for="email") Email
-                input.form-control(type="email" name="email" id="email" placeholder="Enter User email...")
-            .form-group
-                label(for="phone") Phone Number
-                input.form-control(type="text" name="phone" id="phone" placeholder="Enter Phone Number...")
-            .form-group
-                label(for="address") Address
-                input.form-control(type="text" name="address" id="address" placeholder="Enter Address...")
-            .form-group
-                label(for="password") Password
-                input.form-control(type="password" name="password" id="password" placeholder="*********")
-            .form-group
-                label(for="passwordConfrim") Password Confirm
-                input.form-control(type="password" name="passwordConfirm" id="passwordConfirm" placeholder="*********")
-            button.btn.btn__register(type="submit") Register Now
+        section.register-section
+            form.form.register-form(action="/register", method="POST")
+                .form-group
+                    label.form-label(for="name") Full Name
+                    input.form-control(type="name" name="name" id="name" placeholder="Enter Full Name...")
+                .form-group
+                    label.form-label(for="email") Email
+                    input.form-control(type="email" name="email" id="email" placeholder="Enter User email...")
+                .form-group
+                    label.form-label(for="phone") Phone Number
+                    input.form-control(type="text" name="phone" id="phone" placeholder="Enter Phone Number...")
+                .form-group
+                    label.form-label(for="address") Address
+                    input.form-control(type="text" name="address" id="address" placeholder="Enter Address...")
+                .form-group
+                    label.form-label(for="password") Password
+                    input.form-control(type="password" name="password" id="password" placeholder="*********")
+                .form-group
+                    label.form-label(for="passwordConfrim") Password Confirm
+                    input.form-control(type="password" name="passwordConfirm" id="passwordConfirm" placeholder="*********")
+                button.btn.btn__register(type="submit") Register Now

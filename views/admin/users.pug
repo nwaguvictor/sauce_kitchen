@@ -1,22 +1,24 @@
-extends ../layouts/app
+extends index
 
-block content
+block admin-nav
     .container
-        header.admin-header-title Users Section
-        hr
         section.user-section
             .food__display
                 h3.food__list List of all Users
-                table.food__table
+                table.table.food__table
                     tr
+                        th S/N
                         th Name
                         th Email
                         th Phone
                         th Address
                         th Actions
                     
+                    - let cnt = 0;
                     each user in users
+                        - cnt++
                         tr 
+                            td= cnt
                             td= user.name
                             td= user.email
                             td= user.phone

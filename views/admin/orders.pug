@@ -1,22 +1,23 @@
-extends ../layouts/app
+extends index
 
-block content
+block admin-nav
     .container
-        header.admin-header-title Orders Section
-        hr
         section.user-section
             .food__display
                 h3.food__list List of all Orders
-                table.food__table
+                table.table.food__table
                     tr
-                        th Ordered By
+                        th S/N
+                        th Customer
                         th Item
                         th Phone
                         th Address
                         th Actions
-                    
+                    - let cnt = 0;
                     each order in orders
+                        - cnt++;
                         tr 
+                            td= cnt
                             td= order.customer.name
                             td= order.item.name
                             td= order.customer.phone

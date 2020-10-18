@@ -11,21 +11,35 @@ html(lang="en")
         div.app
             header.header
                 div.logo
+                    img.logo-icon(src="/img/logo-1.jpeg", alt="" width=50)
                     h2 Sauce Kitchens
                 nav.navbar
                     a(href="/") Home
                     a(href="/foods") Today's Sauce
 
+
                     if auth
+                        if (auth.role === 'admin' || auth.role === 'chef')
+                            a(href="/admin") Dashboard
+
                         a(href="#")= auth.name.split(' ')[0]
                         a(href="/logout") Log Out
-
                     else
                         a(href="/login") Login
                         a(href="/register") Register
         div.content
             block content
 
-        footer.foot
+            block footer
+                footer.footer
+                    .footer-logo
+                        img(src="/img/logo-2.jpeg", alt="logo" width=100)
+
+                    p Madam Sauce Serves you better. <br> Thank You dear Customer 👌😍                    
+                    nav.footer-nav
+                        p Email Us: 
+                            a(href="#")  sauce-kitchen@help.com                   
+                        p Working Hours: 8am - 5pm (Mon-Sat) 
+                        p Call Us: +234-700-777-777
                 
     script(src="/js/app.js")
